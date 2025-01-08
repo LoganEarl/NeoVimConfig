@@ -6,6 +6,15 @@ return {
 		"rcarriga/nvim-notify",
 	},
 	config = function()
+		require("notify").setup({
+			background_colour = "NotifyBackground",
+			fps = 30,
+			max_width = 200,
+			level = 2,
+			minimum_width = 50,
+			render = "default",
+			merge_duplicates = true,
+		})
 		require("noice").setup({
 			lsp = {
 				override = {

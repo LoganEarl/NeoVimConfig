@@ -19,6 +19,7 @@ vim.o.expandtab = true
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
+vim.o.conceallevel = 2
 
 -- Arduino Keymaps
 vim.keymap.set("n", "<leader>aa", "<cmd>ArduinoAttach<CR>", { desc = "[A]rduino [A]ttach to a board" })
