@@ -34,6 +34,9 @@ return { -- Autoformat
 			bash = {
 				"shfmt",
 			},
+			markdown = {
+				"markdownfmt",
+			},
 			lua = {
 				"stylua",
 				config = {

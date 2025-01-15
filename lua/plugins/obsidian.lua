@@ -17,12 +17,26 @@ return {
 
 		-- see below for full list of optional dependencies 👇
 	},
-	opts = {
-		workspaces = {
-			{
-				name = "personal",
-				path = "~/Documents/ScratchFiles",
+	opts = {},
+	config = function()
+		require("obsidian").setup({
+			workspaces = {
+				{
+					name = "personal",
+					path = "~/Documents/ScratchFiles",
+				},
 			},
-		},
-	},
+			disable_frontmatter = true,
+			ui = {
+				enable = false,
+			},
+			note_id_func = function(title)
+				if title ~= nil then
+					return title
+				else
+					return tostring(os.time())
+				end
+			end,
+		})
+	end,
 }
