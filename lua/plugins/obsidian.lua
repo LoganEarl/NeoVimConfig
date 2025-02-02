@@ -26,6 +26,9 @@ return {
 					path = "~/Documents/ScratchFiles",
 				},
 			},
+			daily_notes = {
+				folder = "Daily Notes",
+			},
 			disable_frontmatter = true,
 			ui = {
 				enable = false,

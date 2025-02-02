@@ -17,6 +17,7 @@ vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianToday<CR>", { desc = "[O]bsidian
 vim.keymap.set("n", "<leader>oy", "<cmd>ObsidianYesterday<CR>", { desc = "[O]bsidian open [Y]esterday's note" })
 vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "[O]bsidian open a [N]ew note" })
 vim.keymap.set("n", "<leader>os", "<cmd>ObsidianQuickSwitch<CR>", { desc = "[O]bsidian [S]earch for a note" })
+vim.keymap.set("n", "<leader>og", "<cmd>ObsidianSearch<CR>", { desc = "[O]bsidian [G]rep using note contents" })
 vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<CR>", { desc = "[O]bsidian [R]ename current note" })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
@@ -33,6 +34,7 @@ vim.keymap.set("n", "<leader>tn", "<cmd>FloatermToggle<CR>", { desc = "[T]ermina
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("n", "<leader>e", ":Oil --float<CR>", { desc = "Open File [E]xplorer" })
+vim.keymap.set("n", "<leader>d", ":w<CR>:bd<CR>", { desc = "Save and [D]elete the current buffer" })
 
 -- This makes it so you can navigate through soft wrapped lines with j and k like usual.
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
