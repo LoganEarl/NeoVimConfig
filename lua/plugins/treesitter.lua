@@ -6,12 +6,14 @@ return { -- Highlight, edit, and navigate code
 	opts = {
 		ensure_installed = {
 			"xml",
+			"csv",
 			"bash",
 			"java",
 			"c",
 			"diff",
 			"html",
 			"lua",
+			"sql",
 			"luadoc",
 			"markdown",
 			"markdown_inline",

@@ -190,6 +190,17 @@ return {
 					"arduino:avr:uno",
 				},
 			},
+
+			sql_language_server = {
+				filetypes = { "sql" },
+				cmd = {
+					"sql-language-server",
+					"up",
+					"--method",
+					"stdio",
+				},
+			},
+
 			clangd = {},
 
 			--jdtls = {
