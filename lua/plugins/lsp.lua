@@ -191,7 +191,7 @@ return {
 				},
 			},
 
-			sql_language_server = {
+			sqlls = {
 				filetypes = { "sql" },
 				cmd = {
 					"sql-language-server",
