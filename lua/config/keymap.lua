@@ -35,6 +35,7 @@ vim.keymap.set("n", "<leader>tn", "<cmd>FloatermToggle<CR>", { desc = "[T]ermina
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("n", "<leader>e", ":Oil --float<CR>", { desc = "Open File [E]xplorer" })
 vim.keymap.set("n", "<leader>d", ":w<CR>:bd<CR>", { desc = "Save and [D]elete the current buffer" })
+vim.keymap.set("n", "<leader>q", ":bd!<CR>", { desc = "[Q]uit the current buffer without saving" })
 
 -- This makes it so you can navigate through soft wrapped lines with j and k like usual.
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })

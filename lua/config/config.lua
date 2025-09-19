@@ -6,6 +6,7 @@ vim.g.have_nerd_font = true
 
 -- Personal preference
 vim.opt.relativenumber = true
+vim.opt.number = true
 vim.opt.showmode = true
 vim.opt.scrolloff = 20
 

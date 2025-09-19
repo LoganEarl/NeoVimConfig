@@ -90,9 +90,7 @@ return {
 				-- or a suggestion from your LSP for this to activate.
 				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
 
-				-- WARN: This is not Goto Definition, this is Goto Declaration.
-				--  For example, in C this would take you to the header.
-				map("<leader>cd", vim.lsp.buf.declaration, "[C]ode [D]eclaration")
+				map("<leader>cd", vim.lsp.buf.definition, "[C]ode [D]efinition")
 
 				-- The following two autocommands are used to highlight references of the
 				-- word under your cursor when your cursor rests there for a little while.

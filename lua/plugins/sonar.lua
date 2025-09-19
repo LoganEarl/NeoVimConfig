@@ -21,8 +21,8 @@ return {
 			filetypes = {
 				"java",
 				"kotlin",
-				"typescript",
-				"javascript",
+				"ts",
+				"js",
 			},
 		})
 	end,
