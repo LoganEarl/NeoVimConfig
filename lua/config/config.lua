@@ -61,10 +61,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
---vim.api.nvim_create_autocmd("FileType", {
---	pattern = "markdown",
---	callback = function()
---		vim.opt_local.textwidth = 140
---		vim.opt_local.formatoptions:append("t")
---	end,
---})
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*.md",
+	command = "setlocal spell spelllang=en_us",
+})

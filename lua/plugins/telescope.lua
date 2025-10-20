@@ -114,5 +114,56 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>sn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "[S]earch [N]eovim files" })
+
+		-- Project Switching Configuration
+		local projects = {
+			{ name = "disco", path = "/Users/s32149/Documents/Delta/disco" },
+			{ name = "disco-ground", path = "/Users/s32149/Documents/Delta/disco/ground-services" },
+			{
+				name = "delta-deploy",
+				path = "/Users/s32149/Documents/Delta/onboard-application-loader/packages/ground-server/scripts",
+			},
+			{ name = "wifi-portal", path = "/Users/s32149/Documents/Delta/wifi-portal" },
+			{ name = "gandalf", path = "/Users/s32149/Documents/Delta/onboard-application-loader" },
+		}
+
+		local function project_picker()
+			require("telescope.pickers")
+				.new({}, {
+					prompt_title = "Switch Project",
+					finder = require("telescope.finders").new_table({
+						results = projects,
+						entry_maker = function(entry)
+							return {
+								value = entry,
+								display = entry.name,
+								ordinal = entry.name,
+							}
+						end,
+					}),
+					sorter = require("telescope.config").values.generic_sorter({}),
+					attach_mappings = function(_, map)
+						map("i", "<CR>", function(prompt_bufnr)
+							local selection = require("telescope.actions.state").get_selected_entry()
+							require("telescope.actions").close(prompt_bufnr)
+							local project = selection.value
+							vim.cmd("cd " .. project.path)
+							vim.cmd("terminal")
+						end)
+						map("n", "<CR>", function(prompt_bufnr)
+							local selection = require("telescope.actions.state").get_selected_entry()
+							require("telescope.actions").close(prompt_bufnr)
+							local project = selection.value
+							vim.cmd("cd " .. project.path)
+							vim.cmd("terminal")
+						end)
+						return true
+					end,
+				})
+				:find()
+		end
+
+		-- Add keymap following your pattern
+		vim.keymap.set("n", "<leader>sp", project_picker, { desc = "[S]earch [P]rojects" })
 	end,
 }

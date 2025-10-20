@@ -39,7 +39,15 @@ local function transfer_todos_from_previous_day()
 	local previous_lines = vim.fn.readfile(previous_file)
 	local todos_section = {}
 	local in_todos = false
+	local in_checked_item = false
 	local last_sub_bullet = nil
+
+	local function insert_pending_sub_bullets()
+		if last_sub_bullet then
+			table.insert(todos_section, last_sub_bullet)
+			last_sub_bullet = nil
+		end
+	end
 
 	for _, line in ipairs(previous_lines) do
 		if line:match("^## TODOs") then
@@ -49,20 +57,31 @@ local function transfer_todos_from_previous_day()
 			break
 		elseif in_todos then
 			if line:match("^%- %[ %]") then -- Unchecked item
-				if last_sub_bullet then
-					table.insert(todos_section, last_sub_bullet)
-					last_sub_bullet = nil
-				end
+				insert_pending_sub_bullets()
+
+				in_checked_item = false
 				table.insert(todos_section, line)
-			elseif not line:match("^%- %[x%]") then -- Skip checked items
-				if line:match("^%s+%- ") then -- Sub-bullet
-					last_sub_bullet = line
-				else
-					if last_sub_bullet then
-						table.insert(todos_section, last_sub_bullet)
-						last_sub_bullet = nil
+			elseif line:match("^%- %[X%]") or line:match("^%- %[x%]") then -- Skip checked items
+				insert_pending_sub_bullets()
+
+				in_checked_item = true
+			else
+				-- Reset in_checked_item for subsection headers
+				if line:match("^###") or line:match("^%S*$") then
+					insert_pending_sub_bullets()
+					in_checked_item = false
+				end
+
+				if not in_checked_item then
+					if line:match("^%s+%- ") then -- Sub-bullet
+						last_sub_bullet = line
+					else
+						if last_sub_bullet then
+							table.insert(todos_section, last_sub_bullet)
+							last_sub_bullet = nil
+						end
+						table.insert(todos_section, line)
 					end
-					table.insert(todos_section, line)
 				end
 			end
 		end
@@ -95,6 +114,7 @@ return {
 	ft = "markdown",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
+		"syncthing-nvim", -- Add Syncthing dependency
 	},
 	opts = {},
 	config = function()
