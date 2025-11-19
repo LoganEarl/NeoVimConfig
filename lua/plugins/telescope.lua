@@ -59,9 +59,27 @@ return { -- Fuzzy Finder (files, lsp, etc)
 						prompt_position = "bottom",
 					},
 				},
+				preview = {
+					treesitter = true,
+				},
+				vimgrep_arguments = {
+					"rg",
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+					"--smart-case",
+				},
 			},
 			initial_mode = "normal",
-			-- pickers = {}
+			pickers = {
+				lsp_references = {
+					show_line = false,
+					trim_text = true,
+					include_declaration = false,
+				},
+			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
@@ -78,7 +96,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>sb", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
 		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
 		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
@@ -125,6 +142,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			},
 			{ name = "wifi-portal", path = "/Users/s32149/Documents/Delta/wifi-portal" },
 			{ name = "gandalf", path = "/Users/s32149/Documents/Delta/onboard-application-loader" },
+			{ name = "offer-fulfilment", path = "/Users/s32149/Documents/Delta/offer-fulfilment" },
 		}
 
 		local function project_picker()

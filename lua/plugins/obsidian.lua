@@ -50,6 +50,10 @@ local function transfer_todos_from_previous_day()
 	end
 
 	for _, line in ipairs(previous_lines) do
+		-- Transfer over our top level header
+		if line:match("^# ") then
+			table.insert(todos_section, line)
+		end
 		if line:match("^## TODOs") then
 			in_todos = true
 			table.insert(todos_section, line)
@@ -114,7 +118,6 @@ return {
 	ft = "markdown",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"syncthing-nvim", -- Add Syncthing dependency
 	},
 	opts = {},
 	config = function()

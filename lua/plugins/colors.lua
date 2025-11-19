@@ -14,7 +14,6 @@ return {
 
 			-- Define code filetypes
 			local code_filetypes = {
-				"java",
 				"javascript",
 				"typescript",
 				"python",

@@ -8,7 +8,6 @@ return { -- Highlight, edit, and navigate code
 			"xml",
 			"csv",
 			"bash",
-			"java",
 			"c",
 			"diff",
 			"html",
