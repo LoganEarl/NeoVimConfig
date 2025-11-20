@@ -134,23 +134,37 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
 		-- Project Switching Configuration
 		local projects = {
-			{ name = "disco", path = "/Users/s32149/Documents/Delta/disco" },
-			{ name = "disco-ground", path = "/Users/s32149/Documents/Delta/disco/ground-services" },
+			{ name = "disco", path = "~/Documents/Delta/disco" },
+			{ name = "disco-ground", path = "~/Documents/Delta/disco/ground-services" },
 			{
 				name = "delta-deploy",
-				path = "/Users/s32149/Documents/Delta/onboard-application-loader/packages/ground-server/scripts",
+				path = "~/Documents/Delta/onboard-application-loader/packages/ground-server/scripts",
 			},
-			{ name = "wifi-portal", path = "/Users/s32149/Documents/Delta/wifi-portal" },
-			{ name = "gandalf", path = "/Users/s32149/Documents/Delta/onboard-application-loader" },
-			{ name = "offer-fulfilment", path = "/Users/s32149/Documents/Delta/offer-fulfilment" },
+			{ name = "wifi-portal", path = "~/Documents/Delta/wifi-portal" },
+			{ name = "gandalf", path = "~/Documents/Delta/onboard-application-loader" },
+			{ name = "offer-fulfilment", path = "~/Documents/Delta/offer-fulfilment" },
 		}
 
+		-- Filter to only projects that exist on this machine
+		local available_projects = {}
+		for _, project in ipairs(projects) do
+			local expanded_path = vim.fn.expand(project.path)
+			if vim.fn.isdirectory(expanded_path) == 1 then
+				table.insert(available_projects, project)
+			end
+		end
+
 		local function project_picker()
+			if #available_projects == 0 then
+				vim.notify("No project directories found on this machine", vim.log.levels.WARN)
+				return
+			end
+
 			require("telescope.pickers")
 				.new({}, {
 					prompt_title = "Switch Project",
 					finder = require("telescope.finders").new_table({
-						results = projects,
+						results = available_projects,
 						entry_maker = function(entry)
 							return {
 								value = entry,
@@ -165,14 +179,14 @@ return { -- Fuzzy Finder (files, lsp, etc)
 							local selection = require("telescope.actions.state").get_selected_entry()
 							require("telescope.actions").close(prompt_bufnr)
 							local project = selection.value
-							vim.cmd("cd " .. project.path)
+							vim.cmd("cd " .. vim.fn.expand(project.path))
 							vim.cmd("terminal")
 						end)
 						map("n", "<CR>", function(prompt_bufnr)
 							local selection = require("telescope.actions.state").get_selected_entry()
 							require("telescope.actions").close(prompt_bufnr)
 							local project = selection.value
-							vim.cmd("cd " .. project.path)
+							vim.cmd("cd " .. vim.fn.expand(project.path))
 							vim.cmd("terminal")
 						end)
 						return true

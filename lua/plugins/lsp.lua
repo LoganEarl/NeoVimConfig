@@ -165,15 +165,6 @@ return {
 				filetypes = { "sh", "zsh" },
 			},
 			kotlin_language_server = {},
-			arduino_language_server = {
-				cmd = {
-					"arduino-language-server",
-					"-cli-config",
-					"/Users/s32149/Library/Arduino15/arduino-cli.yaml",
-					"-fqbn",
-					"arduino:avr:uno",
-				},
-			},
 			sqlls = {
 				filetypes = { "sql" },
 				cmd = {
@@ -194,6 +185,22 @@ return {
 				},
 			},
 		}
+
+		-- Conditionally add Arduino LSP if tools are available
+		if vim.fn.executable("arduino-cli") == 1 and vim.fn.executable("arduino-language-server") == 1 then
+			local config_path = vim.fn.expand("~/Library/Arduino15/arduino-cli.yaml")
+			if vim.fn.filereadable(config_path) == 1 then
+				servers.arduino_language_server = {
+					cmd = {
+						"arduino-language-server",
+						"-cli-config",
+						config_path,
+						"-fqbn",
+						"arduino:avr:uno",
+					},
+				}
+			end
+		end
 
 		-- Ensure the servers and tools above are installed
 		--  To check the current status of installed tools and/or manually install
