@@ -61,6 +61,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.opt.spelloptions = "camel"
+
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = "*.md",
 	command = "setlocal spell spelllang=en_us",

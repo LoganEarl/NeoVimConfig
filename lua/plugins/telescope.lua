@@ -70,6 +70,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 					"--line-number",
 					"--column",
 					"--smart-case",
+					"--fixed-strings",
 				},
 			},
 			initial_mode = "normal",
@@ -132,20 +133,22 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "[S]earch [N]eovim files" })
 
-		-- Project Switching Configuration
+		-- Project picker
 		local projects = {
-			{ name = "disco", path = "~/Documents/Delta/disco" },
-			{ name = "disco-ground", path = "~/Documents/Delta/disco/ground-services" },
 			{
 				name = "delta-deploy",
 				path = "~/Documents/Delta/onboard-application-loader/packages/ground-server/scripts",
 			},
 			{ name = "wifi-portal", path = "~/Documents/Delta/wifi-portal" },
-			{ name = "gandalf", path = "~/Documents/Delta/onboard-application-loader" },
 			{ name = "offer-fulfilment", path = "~/Documents/Delta/offer-fulfilment" },
+			{ name = "gandalf", path = "~/Documents/Delta/onboard-application-loader" },
+			{ name = "disco-ground", path = "~/Documents/Delta/disco/ground-services" },
+			{ name = "disco", path = "~/Documents/Delta/disco" },
+			{ name = "mono-frontend-rx", path = "~/Documents/Delta/mono-frontend-nx/" },
+			{ name = "nvim", path = "~/.config/nvim" },
+			{ name = "magic", path = "~/Documents/ScratchFiles/Magic" },
 		}
 
-		-- Filter to only projects that exist on this machine
 		local available_projects = {}
 		for _, project in ipairs(projects) do
 			local expanded_path = vim.fn.expand(project.path)
@@ -175,27 +178,20 @@ return { -- Fuzzy Finder (files, lsp, etc)
 					}),
 					sorter = require("telescope.config").values.generic_sorter({}),
 					attach_mappings = function(_, map)
-						map("i", "<CR>", function(prompt_bufnr)
+						local function switch_project(prompt_bufnr)
 							local selection = require("telescope.actions.state").get_selected_entry()
 							require("telescope.actions").close(prompt_bufnr)
-							local project = selection.value
-							vim.cmd("cd " .. vim.fn.expand(project.path))
+							vim.cmd("cd " .. vim.fn.expand(selection.value.path))
 							vim.cmd("terminal")
-						end)
-						map("n", "<CR>", function(prompt_bufnr)
-							local selection = require("telescope.actions.state").get_selected_entry()
-							require("telescope.actions").close(prompt_bufnr)
-							local project = selection.value
-							vim.cmd("cd " .. vim.fn.expand(project.path))
-							vim.cmd("terminal")
-						end)
+						end
+						map("i", "<CR>", switch_project)
+						map("n", "<CR>", switch_project)
 						return true
 					end,
 				})
 				:find()
 		end
 
-		-- Add keymap following your pattern
 		vim.keymap.set("n", "<leader>sp", project_picker, { desc = "[S]earch [P]rojects" })
 	end,
 }

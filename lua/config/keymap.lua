@@ -20,7 +20,9 @@ vim.keymap.set("n", "<leader>os", "<cmd>ObsidianQuickSwitch<CR>", { desc = "[O]b
 vim.keymap.set("n", "<leader>og", "<cmd>ObsidianSearch<CR>", { desc = "[O]bsidian [G]rep using note contents" })
 vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<CR>", { desc = "[O]bsidian [R]ename current note" })
 
-
+vim.keymap.set("n", "<leader>jp", function()
+	print(require("jsonpath").get())
+end, { desc = "Print JSON path under cursor" })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`

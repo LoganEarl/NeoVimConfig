@@ -40,12 +40,12 @@ local function transfer_todos_from_previous_day()
 	local todos_section = {}
 	local in_todos = false
 	local in_checked_item = false
-	local last_sub_bullet = nil
+	local last_sub_bullet_section = {}
 
 	local function insert_pending_sub_bullets()
-		if last_sub_bullet then
-			table.insert(todos_section, last_sub_bullet)
-			last_sub_bullet = nil
+		if next(last_sub_bullet_section) ~= nil then
+			vim.list_extend(todos_section, last_sub_bullet_section)
+			last_sub_bullet_section = {}
 		end
 	end
 
@@ -77,12 +77,14 @@ local function transfer_todos_from_previous_day()
 				end
 
 				if not in_checked_item then
-					if line:match("^%s+%- ") then -- Sub-bullet
-						last_sub_bullet = line
+					if line:match("^%s%s%- ") then -- singulary nested sub bullet (nested only once)
+						last_sub_bullet_section = { line }
+					elseif line:match("^%s%s%s+%- ") then -- nested more than one time
+						table.insert(last_sub_bullet_section, line)
 					else
-						if last_sub_bullet then
-							table.insert(todos_section, last_sub_bullet)
-							last_sub_bullet = nil
+						if next(last_sub_bullet_section) ~= nil then
+							vim.list_extend(todos_section, last_sub_bullet_section)
+							last_sub_bullet_section = {}
 						end
 						table.insert(todos_section, line)
 					end
@@ -92,8 +94,8 @@ local function transfer_todos_from_previous_day()
 	end
 
 	-- Add final sub-bullet if exists
-	if last_sub_bullet then
-		table.insert(todos_section, last_sub_bullet)
+	if next(last_sub_bullet_section) ~= nil then
+		vim.list_extend(todos_section, last_sub_bullet_section)
 	end
 
 	-- Write to today's file
