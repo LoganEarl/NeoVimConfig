@@ -147,6 +147,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			{ name = "mono-frontend-rx", path = "~/Documents/Delta/mono-frontend-nx/" },
 			{ name = "nvim", path = "~/.config/nvim" },
 			{ name = "magic", path = "~/Documents/ScratchFiles/Magic" },
+			{ name = "dark-orb", path = "~/Documents/Home/DarkOrb" },
+			{ name = "tower", path = "~/Documents/Home/TheTower" },
 		}
 
 		local available_projects = {}

@@ -165,6 +165,7 @@ return {
 				filetypes = { "sh", "zsh" },
 			},
 			kotlin_language_server = {},
+			pylsp = {},
 			sqlls = {
 				filetypes = { "sql" },
 				cmd = {

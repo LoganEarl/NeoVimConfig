@@ -17,6 +17,7 @@ return { -- Highlight, edit, and navigate code
 			"markdown",
 			"markdown_inline",
 			"query",
+			"python",
 			"vim",
 			"vimdoc",
 			"typescript",
