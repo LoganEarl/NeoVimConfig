@@ -27,8 +27,6 @@ end, { desc = "Print JSON path under cursor" })
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-vim.keymap.set("n", "<leader>tt", "<cmd>FloatermShow<CR>", { desc = "[T]erminal [T]oggle existing terminal" })
-vim.keymap.set("n", "<leader>tn", "<cmd>FloatermToggle<CR>", { desc = "[T]erminal create [N]ew" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -37,7 +35,7 @@ vim.keymap.set("n", "<leader>tn", "<cmd>FloatermToggle<CR>", { desc = "[T]ermina
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-vim.keymap.set("n", "<leader>e", ":Oil --float<CR>", { desc = "Open File [E]xplorer" })
+vim.keymap.set("n", "<leader>e", ":Neotree filesystem toggle bottom<CR>", { desc = "Open File [E]xplorer" })
 vim.keymap.set("n", "<leader>d", ":w<CR>:bd<CR>", { desc = "Save and [D]elete the current buffer" })
 vim.keymap.set("n", "<leader>q", ":bd!<CR>", { desc = "[Q]uit the current buffer without saving" })
 
@@ -47,3 +45,14 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set("n", "$", "v:count == 0 ? 'g$' : '$'", { expr = true, silent = true })
 vim.keymap.set("n", "_", "v:count == 0 ? 'g_' : '_'", { expr = true, silent = true })
 vim.keymap.set("n", "^", "v:count == 0 ? 'g^' : '^'", { expr = true, silent = true })
+vim.keymap.set("n", "<leader>tt", ":ToggleTerm<CR>", { desc = "[T]oggle [T]erminal" })
+
+-- Global variable to keep track of the terminal buffer number and window ID
+-- This is optional but helps with managing state in a single session
+if vim.g.term_v_buf_id == nil then
+	vim.g.term_v_buf_id = nil
+end
+
+if vim.g.term_v_win_id == nil then
+	vim.g.term_v_win_id = nil
+end

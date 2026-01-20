@@ -148,6 +148,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			{ name = "nvim", path = "~/.config/nvim" },
 			{ name = "magic", path = "~/Documents/ScratchFiles/Magic" },
 			{ name = "dark-orb", path = "~/Documents/Home/DarkOrb" },
+			{ name = "ab-sync", path = "~/Documents/Home/ABSync" },
 			{ name = "tower", path = "~/Documents/Home/TheTower" },
 		}
 
@@ -184,7 +185,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 							local selection = require("telescope.actions.state").get_selected_entry()
 							require("telescope.actions").close(prompt_bufnr)
 							vim.cmd("cd " .. vim.fn.expand(selection.value.path))
-							vim.cmd("terminal")
+							--vim.cmd("terminal")
 						end
 						map("i", "<CR>", switch_project)
 						map("n", "<CR>", switch_project)
