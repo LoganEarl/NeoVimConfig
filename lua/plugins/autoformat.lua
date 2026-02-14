@@ -35,7 +35,10 @@ return { -- Autoformat
 				"shfmt",
 			},
 			markdown = {
-				"markdownfmt",
+				"prettierd",
+				"prettier",
+				"injected",
+				stop_after_first = true,
 			},
 			lua = {
 				"stylua",

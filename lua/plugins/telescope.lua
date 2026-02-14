@@ -135,16 +135,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
 		-- Project picker
 		local projects = {
-			{
-				name = "delta-deploy",
-				path = "~/Documents/Delta/onboard-application-loader/packages/ground-server/scripts",
-			},
+			{ name = "kiro", path = "~/.kiro" },
 			{ name = "wifi-portal", path = "~/Documents/Delta/wifi-portal" },
+			{ name = "delta-notes", path = "~/Documents/ScratchFiles/Delta" },
 			{ name = "offer-fulfilment", path = "~/Documents/Delta/offer-fulfilment" },
 			{ name = "gandalf", path = "~/Documents/Delta/onboard-application-loader" },
 			{ name = "disco-ground", path = "~/Documents/Delta/disco/ground-services" },
 			{ name = "disco", path = "~/Documents/Delta/disco" },
 			{ name = "mono-frontend-rx", path = "~/Documents/Delta/mono-frontend-nx/" },
+			{ name = "transcripts", path = "~/Documents/ScratchFiles/Delta/Transcripts/" },
 			{ name = "nvim", path = "~/.config/nvim" },
 			{ name = "magic", path = "~/Documents/ScratchFiles/Magic" },
 			{ name = "dark-orb", path = "~/Documents/Home/DarkOrb" },

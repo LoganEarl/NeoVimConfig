@@ -20,6 +20,14 @@ vim.keymap.set("n", "<leader>os", "<cmd>ObsidianQuickSwitch<CR>", { desc = "[O]b
 vim.keymap.set("n", "<leader>og", "<cmd>ObsidianSearch<CR>", { desc = "[O]bsidian [G]rep using note contents" })
 vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<CR>", { desc = "[O]bsidian [R]ename current note" })
 
+-- Super kill the current buffer by deleting both it and the underlying file
+vim.keymap.set(
+	"n",
+	"<leader>kk",
+	"<cmd>call delete(expand('%')) | bdelete!<CR>",
+	{ desc = "[K]ill it, [K]ill it with fire!" }
+)
+
 vim.keymap.set("n", "<leader>jp", function()
 	print(require("jsonpath").get())
 end, { desc = "Print JSON path under cursor" })
@@ -45,7 +53,7 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set("n", "$", "v:count == 0 ? 'g$' : '$'", { expr = true, silent = true })
 vim.keymap.set("n", "_", "v:count == 0 ? 'g_' : '_'", { expr = true, silent = true })
 vim.keymap.set("n", "^", "v:count == 0 ? 'g^' : '^'", { expr = true, silent = true })
-vim.keymap.set("n", "<leader>tt", ":ToggleTerm<CR>", { desc = "[T]oggle [T]erminal" })
+vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>", { desc = "[T]erminal" })
 
 -- Global variable to keep track of the terminal buffer number and window ID
 -- This is optional but helps with managing state in a single session
