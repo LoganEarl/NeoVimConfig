@@ -145,6 +145,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			{ name = "mono-frontend-rx", path = "~/Documents/Delta/mono-frontend-nx/" },
 			{ name = "transcripts", path = "~/Documents/ScratchFiles/Delta/Transcripts/" },
 			{ name = "nvim", path = "~/.config/nvim" },
+			{ name = "voice-of-the-tower", path = "~/Documents/Home/VoiceOfTheTower/" },
 			{ name = "magic", path = "~/Documents/ScratchFiles/Magic" },
 			{ name = "dark-orb", path = "~/Documents/Home/DarkOrb" },
 			{ name = "ab-sync", path = "~/Documents/Home/ABSync" },
