@@ -4,6 +4,9 @@ vim.g.maplocalleader = " "
 -- Use fancy symbols. Allows you to have icons for java files, js files, and other niceties.
 vim.g.have_nerd_font = true
 
+vim.g.gpg_update_tty = true
+vim.g.gpg_prime_agent = true
+
 -- Personal preference
 vim.opt.relativenumber = true
 vim.opt.number = true
